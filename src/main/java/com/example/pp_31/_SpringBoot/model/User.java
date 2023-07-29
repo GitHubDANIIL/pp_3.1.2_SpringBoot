@@ -1,6 +1,9 @@
 package com.example.pp_31._SpringBoot.model;
 
+
 import jakarta.persistence.*;
+import jakarta.validation.constraints.*;
+
 
 @Entity
 @Table(name = "users")
@@ -11,12 +14,20 @@ public class User {
     private int id;
 
     @Column
+    @NotEmpty(message = "Name should not be empty")
+    @Pattern(regexp = "^[a-zA-Zа-яА-Я]+$", message = "The name field can contain only letters")
+    @Size(min = 2, max = 45, message = "Name should be between 2 and 45 characters")
     private String name;
 
     @Column
+    @NotEmpty(message = "Surname should not be empty")
+    @Pattern(regexp = "^[a-zA-Zа-яА-Я]+$", message = "The surname field can contain only letters")
+    @Size(min = 2, max = 45, message = "SurName should be between 2 and 45 characters")
     private String surname;
 
     @Column
+    @NotNull
+    @Min(value = 0, message = "Age should be greater than 0")
     private int age;
 
     public User() {
